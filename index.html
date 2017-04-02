@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>YouTube Playlist</title>
+		<link rel="stylesheet" type="text/css" href="index.css">
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-route.js"></script>
+	</head>
+	<body ng-app="YTP" ng-controller="appCtrl">
+		<div class="header">
+			<a href="#!/addVideo" ng-class="{'active':active.page === 'video'}">Add Video</a>
+			<a href="#!/player" ng-class="{'active':active.page === 'player'}">Video Player</a>
+		</div>
+		<div id="library" style="position:fixed;width:50%;display:inline-block">
+			<a href="#!/player" ng-if="active.page === 'video'"><button>Play Videos</button></a>
+			<a href="#!/addVideo" ng-if="active.page === 'player'"><button>Add Videos</button></a>
+			<div class="playlist">Library/Playlist</div>
+			<iframe ng-repeat="vid in vidArr" ng-src="{{baseURL + vid.id | trustAsResourceUrl}}"></iframe>
+		</div>
+		<div ng-view></div>
+		<script type="text/javascript" src="index.js"></script>
+		<script>
+			// var tag = document.createElement('script');
+	  //    	tag.src = "https://www.youtube.com/iframe_api";
+	  //     	var firstScriptTag = document.getElementsByTagName('script')[0];
+	  //   	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+		</script>
+	</body>
+</html>
