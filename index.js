@@ -76,19 +76,6 @@ angular.module('Video',[])
 		}
 	}
 }])
-// .factory('checkVideo', ['$http', function($http){		//Requires signing up
-// 	return function(reqObj, callBack){
-// 		var url = 'https://www.googleapis.com/youtube/v3/videos?part=snippet&id='+reqObj.id;
-// 		$http.get(url)
-// 		.then(function(response){
-// 			callBack(response);
-// 		},
-// 		function(errorData){
-// 			callBack(response);
-// 			console.log("Error in checking requested video.");
-// 		})
-// 	}
-// }])
 ;
 angular.module('Player',[])
 .controller('PlayerCtrl',['$scope', function($scope){
@@ -121,14 +108,9 @@ angular.module('Player',[])
 	        });
       	}
       }
-      // 4. The API will call this function when the video player is ready.
-      // $scope.onPlayerReady = function(event) {
-      //   event.target.playVideo();
-      // }
 
-      // 5. The API calls this function when the player's state changes.
+      //    The API calls this function when the player's state changes.
       //    The function indicates that when playing a video (state=1),
-      //    the player should play for six seconds and then stop.
       $scope.onPlayerStateChange = function(event) {
         if (event.data == YT.PlayerState.PLAYING) {
         	started = true;
@@ -145,16 +127,13 @@ angular.module('Player',[])
       $scope.nextVideo = function(){
       	if($scope.vidArr[index]){
       		vid = $scope.vidArr[index];
-	      	// if(vid.id){
-	      		$scope.player.loadVideoById({videoId:vid.id,
-	                     startSeconds:vid.start,
-	                     endSeconds:vid.end});
-	      	// }
-	      	// else if(vid.url){
-	      		// player.loadVideoByUrl({mediaContentUrl:vid.url,
-	        //              startSeconds:vid.start,
-	        //              endSeconds:vid.end});
-	      	// }
+      		$scope.player.loadVideoById(
+	      		{
+	      			videoId:vid.id,
+	                startSeconds:vid.start,
+		            endSeconds:vid.end
+		        }
+	        );
 	      	index += 1;
       	}
       	else{
